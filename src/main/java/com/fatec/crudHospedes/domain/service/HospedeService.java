@@ -10,4 +10,11 @@ public interface HospedeService {
     void inativar(Long id);
     HospedeModel consultar(Long id);
     List<HospedeModel> listarTodos();
+    List<HospedeModel> consultarComFiltros(
+        String nome,
+        String cpf,
+        String cidade,
+        Boolean ativo
+);
+
 }

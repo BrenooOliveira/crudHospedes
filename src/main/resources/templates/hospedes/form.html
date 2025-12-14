@@ -117,8 +117,34 @@
         <input type="email" name="email" th:value="${hospede.email}" required />
 
         <label>Logradouro</label>
-        <input type="text" name="logradouro" th:value="${hospede.logradouro}" required />
+        <input type="text" name="endereco.logradouro"
+            th:value="${hospede.endereco?.logradouro}" />
 
+        <label>Número</label>
+        <input type="text" name="endereco.numero"
+            th:value="${hospede.endereco?.numero}" />
+
+        <label>CEP</label>
+        <input type="text" name="endereco.cep"
+            th:value="${hospede.endereco?.cep}" />
+
+        <label>Bairro</label>
+        <input type="text" name="endereco.bairro"
+            th:value="${hospede.endereco?.bairro}" />
+
+        <label>Complemento</label>
+        <input type="text" name="endereco.complemento"
+            th:value="${hospede.endereco?.complemento}" />
+
+        <label>Cidade</label>
+        <input type="text" name="endereco.cidade"
+            th:value="${hospede.endereco?.cidade}" />
+
+        <label>Estado</label>
+        <input type="text" name="endereco.estado"
+            th:value="${hospede.endereco?.estado}" />
+
+            
         <button type="submit">Salvar</button>
     </form>
 

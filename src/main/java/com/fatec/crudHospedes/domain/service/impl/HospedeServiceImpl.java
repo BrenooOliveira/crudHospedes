@@ -22,8 +22,7 @@ public class HospedeServiceImpl implements HospedeService {
 
     @Override
     public HospedeModel cadastrar(HospedeModel hospede){
-
-        executarValidacoes(hospede);
+        validacoes.forEach(v -> v.validar(hospede));
 
         return repository.save(hospede);
     }
@@ -48,7 +47,7 @@ public class HospedeServiceImpl implements HospedeService {
         existente.setDtNascimento(hospede.getDtNascimento());
         existente.setTelefone(hospede.getTelefone());
         existente.setEmail(hospede.getEmail());
-        existente.setLogradouro(hospede.getLogradouro());
+        existente.setEndereco(hospede.getEndereco());
 
         return repository.save(existente);
     }
@@ -79,4 +78,20 @@ public class HospedeServiceImpl implements HospedeService {
             .filter(HospedeModel::getAtivo)
             .toList();
     }
+
+    @Override
+    public List<HospedeModel> consultarComFiltros(
+            String nome,
+            String cpf,
+            String cidade,
+            Boolean ativo) {
+
+        return repository.filtrar(
+                nome != null && nome.isBlank() ? null : nome,
+                cpf != null && cpf.isBlank() ? null : cpf,
+                cidade != null && cidade.isBlank() ? null : cidade,
+                ativo
+        );
+    }
+
 }

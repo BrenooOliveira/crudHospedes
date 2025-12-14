@@ -88,6 +88,39 @@
 
     <h1>Hóspedes</h1>
 
+    <form method="get" action="/hospedes"
+      style="margin-bottom:20px; display:flex; gap:10px; flex-wrap:wrap;">
+
+        <input type="text" name="nome" placeholder="Nome"
+            th:value="${nome}" />
+
+        <input type="text" name="cpf" placeholder="CPF"
+            th:value="${cpf}" />
+
+        <input type="text" name="cidade" placeholder="Cidade"
+            th:value="${cidade}" />
+
+        <select name="ativo">
+            <option value="">Situação</option>
+            <option value="true" th:selected="${ativo == true}">Ativo</option>
+            <option value="false" th:selected="${ativo == false}">Inativo</option>
+        </select>
+
+        <button type="submit"
+                style="background:#3867d6; color:white; border:none;
+                    padding:10px 15px; border-radius:8px; cursor:pointer;">
+            Filtrar
+        </button>
+
+        <a href="/hospedes"
+        style="padding:10px 15px; background:#dcdde1; border-radius:8px;
+                text-decoration:none; color:#333;">
+            Limpar
+        </a>
+    </form>
+
+
+
     <a class="btn-new" href="/hospedes/cadastrar">+ Cadastrar novo hóspede</a>
 
     <table>

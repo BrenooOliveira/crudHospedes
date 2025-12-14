@@ -6,6 +6,7 @@ import com.fatec.crudHospedes.domain.repository.HospedeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+
 @Component
 @RequiredArgsConstructor
 public class ValidarUnicidadeCpf implements IValidacaoStrategy<HospedeModel> {
@@ -13,11 +14,9 @@ public class ValidarUnicidadeCpf implements IValidacaoStrategy<HospedeModel> {
     private final HospedeRepository repository;
 
     @Override
-    public void validar(HospedeModel h)  {
-
-        boolean jaExiste = repository.existsByCpf(h.getCpf());
-
-        if (jaExiste)
-            throw new BusinessException("CPF já está cadastrado.");
+    public void validar(HospedeModel hospede) {
+        if (repository.existsByCpf(hospede.getCpf())) {
+            throw new BusinessException("CPF já cadastrado.");
+        }
     }
 }

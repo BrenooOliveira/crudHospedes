@@ -3,6 +3,7 @@ package com.fatec.crudHospedes.domain.model;
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,29 +15,37 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Entity
 @Table(name = "hospedes")
-@Getter @Setter // lombok
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class HospedeModel {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(unique = true)
+    @Column(nullable = false)
     private String nome;
 
+    @Column(nullable = false, unique = true)
     private String cpf;
+
+    @Column(nullable = false)
     private LocalDate dtNascimento;
 
+    @Column(nullable = false)
     private String telefone;
 
+    @Column(nullable = false)
     private String email;
-    private String logradouro;
+
+    @Embedded
+    private Endereco endereco;
 
     private Boolean ativo = true;
-
 }

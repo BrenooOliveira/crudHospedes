@@ -3,8 +3,10 @@ package com.fatec.crudHospedes.web.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fatec.crudHospedes.domain.exception.BusinessException;
+import com.fatec.crudHospedes.domain.model.Endereco;
 import com.fatec.crudHospedes.domain.model.HospedeModel;
 import com.fatec.crudHospedes.domain.service.HospedeService;
 
@@ -21,18 +23,16 @@ public class HospedeController {
 
     private final HospedeService service;
 
-    @GetMapping
-    public String listar(Model model) {
-        model.addAttribute("lista",service.listarTodos());
-
-        return "hospedes/listar";
-    }
 
     @GetMapping("/cadastrar")
-    public String formCadastrar(Model model){
-        model.addAttribute("hospede",new HospedeModel());
+    public String formCadastrar(Model model) {
+        HospedeModel h = new HospedeModel();
+        h.setEndereco(new Endereco());
+        model.addAttribute("hospede", h);
         return "hospedes/form";
     }
+
+
 
     @PostMapping
     public String cadastrar(HospedeModel hospede, Model model) {
@@ -72,6 +72,26 @@ public class HospedeController {
         service.inativar(id);
         return "redirect:/hospedes";
     }
+
+    @GetMapping
+    public String listar(
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false) String cpf,
+            @RequestParam(required = false) String cidade,
+            @RequestParam(required = false) Boolean ativo,
+            Model model) {
+
+        model.addAttribute("lista",
+                service.consultarComFiltros(nome, cpf, cidade, ativo));
+
+        model.addAttribute("nome", nome);
+        model.addAttribute("cpf", cpf);
+        model.addAttribute("cidade", cidade);
+        model.addAttribute("ativo", ativo);
+
+        return "hospedes/listar";
+    }
+
 
 
 }
