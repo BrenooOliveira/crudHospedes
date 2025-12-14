@@ -72,6 +72,13 @@ public class HospedeController {
         service.inativar(id);
         return "redirect:/hospedes";
     }
+    
+    @GetMapping("/{id}/ativar")
+    public String ativar(@PathVariable Long id) {
+        service.ativar(id);
+        return "redirect:/hospedes";
+    }
+
 
     @GetMapping
     public String listar(

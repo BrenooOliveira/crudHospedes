@@ -140,12 +140,26 @@
                 th:classappend="${!h.ativo} ? 'inactive'"></td>
 
             <td>
-                <a class="action"
-                   th:href="'/hospedes/' + ${h.id} + '/editar'">Editar</a>
+            <a class="action"
+            th:href="'/hospedes/' + ${h.id} + '/editar'">
+                Editar
+            </a>
 
-                <a class="action inactive"
-                   th:href="'/hospedes/' + ${h.id} + '/inativar'">Inativar</a>
-            </td>
+            <!-- Se estiver ATIVO, mostra Inativar -->
+            <a class="action inactive"
+            th:if="${h.ativo}"
+            th:href="'/hospedes/' + ${h.id} + '/inativar'">
+                Inativar
+            </a>
+
+            <!-- Se estiver INATIVO, mostra Ativar -->
+            <a class="action"
+            th:if="${!h.ativo}"
+            th:href="'/hospedes/' + ${h.id} + '/ativar'">
+                Ativar
+            </a>
+            </td>   
+
         </tr>
     </table>
 

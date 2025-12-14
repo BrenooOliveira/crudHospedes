@@ -8,6 +8,7 @@ public interface HospedeService {
     HospedeModel cadastrar(HospedeModel hospede);
     HospedeModel alterar(Long id, HospedeModel hospede);
     void inativar(Long id);
+    void ativar(Long id);
     HospedeModel consultar(Long id);
     List<HospedeModel> listarTodos();
     List<HospedeModel> consultarComFiltros(
